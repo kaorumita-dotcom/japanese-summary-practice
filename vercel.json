@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/api/status",
+      "destination": "/api/status.mjs"
+    },
+    {
+      "source": "/api/evaluate",
+      "destination": "/api/evaluate.mjs"
+    }
+  ]
+}
