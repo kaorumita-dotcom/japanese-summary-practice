@@ -5,7 +5,7 @@ import {
   countJapaneseChars,
   targetSummaryLength,
   validateSubmission
-} from "./server.mjs";
+} from "./lib/core.mjs";
 
 test("counts characters without whitespace", () => {
   assert.equal(countJapaneseChars("大学 1 年生\nの要約"), 8);

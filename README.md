@@ -46,8 +46,20 @@ http://127.0.0.1:3000
 node --test
 ```
 
-## Deployment Notes
+## Vercel Deployment
 
-このアプリはGemini APIキーをサーバー側で扱うため、静的ホスティングのみのGitHub Pagesには向きません。Render、Railway、Fly.io、VercelのServerless Function構成など、環境変数をサーバー側に設定できる公開先を使ってください。
+このアプリはGemini APIキーをサーバー側で扱うため、静的ホスティングのみのGitHub Pagesには向きません。Vercel Hobbyで公開する場合は、このGitHubリポジトリをVercelにImportしてください。
 
-公開先では `GEMINI_API_KEY` を環境変数として設定し、必要に応じて `DAILY_REQUEST_LIMIT` を授業規模に合わせて調整します。
+VercelのProject SettingsでEnvironment Variablesを設定します。
+
+```env
+GEMINI_API_KEY=your_google_ai_studio_api_key
+DAILY_REQUEST_LIMIT=80
+MIN_SECONDS_BETWEEN_REQUESTS=20
+MAX_SOURCE_CHARS=800
+MAX_SUMMARY_CHARS=500
+```
+
+`public/` は静的ファイルとして配信され、`api/status.mjs` と `api/evaluate.mjs` はVercel Functionsとして動作します。
+
+日次回数制限はサーバー実行環境のメモリ上で管理する簡易ガードです。Vercel Functionsではインスタンス再作成時にカウントがリセットされる可能性があるため、厳密な全体上限が必要な場合はVercel KVや外部DBなどの永続ストレージを追加してください。
