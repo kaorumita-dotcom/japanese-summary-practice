@@ -1,13 +1,27 @@
 {
   "version": 2,
-  "rewrites": [
+  "builds": [
     {
-      "source": "/api/status",
-      "destination": "/api/status.mjs"
+      "src": "public/**/*",
+      "use": "@vercel/static"
     },
     {
-      "source": "/api/evaluate",
-      "destination": "/api/evaluate.mjs"
+      "src": "api/*.mjs",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1.mjs"
+    },
+    {
+      "src": "/(.*\\.(?:css|js|ico|png|jpg|jpeg|svg|webp))",
+      "dest": "/public/$1"
+    },
+    {
+      "src": "/.*",
+      "dest": "/public/index.html"
     }
   ]
 }
