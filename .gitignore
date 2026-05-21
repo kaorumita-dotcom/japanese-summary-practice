@@ -1,2 +1,7 @@
 .env
 node_modules/
+# Manus internal project config (contains secrets - NEVER commit)
+.project-config.json
+
+# Manus dev logs
+.manus-logs/
